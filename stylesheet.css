@@ -14,6 +14,7 @@
 
 .middle_table1
 {
+background:#bbb;
 
 }
 .middle_table1 .td
@@ -26,7 +27,7 @@
 .dataTableHeadingRow 
 { 
  height:30px;
- background-color:#dddddd;
+ background-color:#cccccc;
 }
 
 .dataTableRow1 
@@ -39,3 +40,29 @@
  height:20px;
  background-color: #ffffff; 
 }
+#field_order_box tr.field_content
+{
+ background:#f5f5f5;
+}
+#field_order_box tr.field_content-highlight
+{
+height:40px;
+background:#FFFCBF;
+}
+#field_order_box tr.field_content:hover
+{
+ cursor: move;
+ background:#dfdfdf;
+}
+.ui-icon {
+ display: block;
+ float:right;
+ text-indent: -99999px;
+ overflow: hidden;
+ background-repeat: no-repeat;
+ width: 16px;
+ height: 16px;
+ background-position: 16px 16px;
+ background-image: url(img/icons.png)
+}
+.ui-icon-arrowthick-2-n-s { background-position: -128px -48px; }

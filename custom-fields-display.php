@@ -3,7 +3,7 @@
 Plugin Name: Custom fields display
 Plugin URI: http://wordpress.org/extend/plugins/custom-fields-display/
 Description: Custom fields display in post content.You have option to specific custom filds display in post content in any theme.
-Version: 1.0
+Version: 1.1
 Author: Shambhu Prasad Patnaik
 Author URI:http://aynsoft.com/
 */
@@ -42,17 +42,18 @@ natcasesort($keys);
  if($action=='Show Now')
  {
   $default_option =array();
+  if(isset($_POST['check_box']))
+  {
+   $field_check = stripslashes_deep($_POST['check_box']);
+   foreach($field_check as $key =>$value)
+   $select_field[] = $value;
+  }
   foreach($keys as $key)
   {
    $field_id = stripslashes_deep($key);
-   $field_check = stripslashes_deep($_POST['check_'.$field_id]);
    $field_label = stripslashes_deep($_POST['field_'.$field_id]);
-   if($field_check=='on')
-   {
-    $select_field[] = $field_id;
-   }
    if($field_label=='')
-    $field_label = stripslashes_deep($field['label']);
+   $field_label = stripslashes_deep($field['label']);
 
    $default_option[$field_id] =$field_label; 
   }
@@ -82,40 +83,72 @@ natcasesort($keys);
 ?>
  <h3 class="title">About</h3>
  <p>Custom fields display in post content.You have option to specific custom filds display in post content in any theme.</p>
-
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+jQuery(document).ready(function(){
+  "use strict";
+jQuery( "#field_order_box" ).sortable({placeholder: "field_content-highlight"});
+ 
+});
+//-->
+</SCRIPT>
 <?php
-echo'<table border="0" width="98%" cellspacing="1" cellpadding="4" class="middle_table1"> <form method="post" action="'.$action_url.'"  onsubmit="return ValidateForm(this)">        
+ wp_enqueue_script("jquery-ui-sortable");
+echo'<div><form method="post" action="'.$action_url.'"  onsubmit="return ValidateForm(this)"><table border="0" width="98%" cellspacing="1" cellpadding="4"   class="middle_table1">       
+       <tbody id="field_order_box" >
       <tr class="dataTableHeadingRow">
        <th colspan="2">Show fields</th>
        <th>Display Label</th>
+       <th>Order</th>
       </tr>';
- $i =1;
+ 
+ $i =0;
+ $data1 =array();
+ $total_record =count($keys);
+ foreach($default_select as  $key =>$value)
+ {
+  if(in_array($value,$keys))
+  $data1[]=array('key_name'=>$value,'volume'=>$key); 
+ }
  foreach($keys as $key)
  {
   $field_id          = $key;
-  $field_label       = $key;
-  if(isset($default_option[$key]))
-  $field_value       = $default_option[$key];
+  if(!in_array($field_id,$default_select))
+  {
+   $data1[]=array('key_name'=>$field_id,'volume'=>$total_record); 
+  }  
+ }
+ foreach ($data1 as $key => $row) {
+   $volume[$key]  = $row['volume'];
+   $name[$key] = $row['key_name'];
+ }
+ if($data1)
+ array_multisort($volume, SORT_ASC, $name, SORT_ASC, $data1);
+ foreach($data1 as $key =>$value)
+ {
+  $field_id          = $value['key_name'];
+  $field_label       = $field_id;
+  if(isset($default_option[$field_id]))
+  $field_value       = $default_option[$field_id];
   else 
-  $field_value       = $key;
+  $field_value       = $field_id;
   if(in_array($field_id,$default_select))
-  $fild_checkbox = custom_fields_display_checkbox_field('check_'.$field_id,'on', true,'', ' id="check_'.$field_id.'" '); 
+  $fild_checkbox = custom_fields_display_checkbox_field('check_box[]',$field_id, true,'', ' id="check_'.$field_id.'" '); 
   else
-  $fild_checkbox = custom_fields_display_checkbox_field('check_'.$field_id,'on', false,'', ' id="check_'.$field_id.'" '); 
+  $fild_checkbox = custom_fields_display_checkbox_field('check_box[]',$field_id, false,'', ' id="check_'.$field_id.'" '); 
 
-  echo '<tr class="dataTableRow'.(($i%2==1)?'1':'2').'" >
+  echo '<tr id="'.$field_id.'" class="field_content" >
        <td valign="top" >'.$fild_checkbox.'</td>
        <td valign="top" width="30%"><nobr><label for="check_'.$field_id.'" >'.$field_label.'</label></nobr></td>
        <td valign="top"><input type="text"  name ="field_'.$field_id.'" value="'.esc_attr($field_value).'" size="40"></td>
+	   <td><span class="ui-icon ui-icon-arrowthick-2-n-s"></span></td>
     </tr>';
-
-  $i++;
 
  }
  echo' <tr>
         <td colspan="5"  align="center"><input type="submit" name="update" value="Show Now" class="button button-primary button-large"></td>
-       </tr></form>
-	 </table>';
+       </tr></tbody>
+	 </table></form></div>';
  echo'</div></div>';
 
 }
@@ -196,5 +229,4 @@ function custom_fields_display_content_filter( $content )
  return $add_content.$content;
 }
 endif;
-
 ?>
