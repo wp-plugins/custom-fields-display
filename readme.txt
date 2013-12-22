@@ -13,6 +13,12 @@ Custom fields display in post content.You have option to specific custom filds d
 
 Custom fields display in post content.You have option to specific custom filds display in post content in any theme.
 
+**features**
+
+- Custom fields display in front end without edit existing theme.
+- Select which filed visible.
+- customizes display order.
+
 == Installation ==
 
 
@@ -20,11 +26,6 @@ Custom fields display in post content.You have option to specific custom filds d
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Go **Custom Fields Display** in admin menu and set custom field which you want to dispaly in front end
 
-**features**
-
-- Custom fields display in front end without edit existing theme.
-- Select which filed visible.
-- customizes display order.
 
 == Frequently Asked Questions ==
 
