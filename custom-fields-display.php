@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/plugins/custom-fields-display/
 Description: Custom fields display in post content.You have option to specific custom filds display in post content in any theme.
 Version: 1.1
 Author: Shambhu Prasad Patnaik
-Author URI:http://aynsoft.com/
+Author URI:http://socialcms.wordpress.com/
 */
 
 
