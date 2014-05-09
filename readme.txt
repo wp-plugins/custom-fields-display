@@ -1,9 +1,9 @@
 === Custom Fields Display ===
 Contributors: shambhu patnaik
-Donate link: http://aynsoft.com/
+Donate link: http://socialcms.wordpress.com/
 Tags: custom fields display,meta filter,custom fields,display custom fields,meta-data,display meta-data,the_meta,post meta data,display post meta
 Requires at least: 2.9
-Tested up to: 3.8
+Tested up to: 3.9.1
 Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,6 +18,8 @@ Custom fields display in post content.You have option to specific custom filds d
 - Custom fields display in front end without edit existing theme.
 - Select which filed visible.
 - customizes display order.
+
+More Detail : http://socialcms.wordpress.com/
 
 == Installation ==
 
