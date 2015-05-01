@@ -3,7 +3,7 @@ Contributors: shambhu patnaik
 Donate link: http://socialcms.wordpress.com/
 Tags: custom fields display,meta filter,custom fields,display custom fields,meta-data,display meta-data,the_meta,post meta data,display post meta
 Requires at least: 2.9
-Tested up to: 4.1
+Tested up to: 4.2.1
 Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
